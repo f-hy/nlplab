@@ -1,0 +1,61 @@
+Nltk
+优点：区分出了动词过去式和动词过去分词，对专有名词的识别效果不错，对动词的不同形式区分比较细致。
+缺点： 'Xi' 和 'Jinping' 词性不一致。容易将名次和动词分错，比如('Xi', 'VB') 就是将名词标成了动词原形。将太多的词标注成专有名词，不能进一步区分不同的专有名词，而且容易将首字母大写的词标注成专有名词。不能对标点符号进行标注。
+
+Spacy
+优点：能够对标点符号进行标注。能够区分名词和专有名词，比如将 XiJinping 标注成了专有名词而不是名词
+缺点：将太多的词标注为 'PROPN' ,而不能将其中的词进一步细分
+
+Stanfordnlp
+优点：相较于 NLTK 来说，将 Xi 和 Jinping 标注成一个词性是进步的。将Fuping 标注成 NNP 而不是 VBG 也是进步的，没有出现 NLTK 中('Xi','VB') 的情况。整体效果相较于 NLTK 来说都是有长足进步的。
+缺点：和 NLTK 一样，对名词的区分度不强，专有名词不能再细分，名词与专有名词容易搞混
+
+Xi Jinping, male, Han ethnicity, was born in June 1953 and is from Fuping, Shaanxi Province. He began his first job in 
+January 1969 and joined the Communist Party of China (CPC) in January 1974. Xi graduated from School of Humanities and 
+Social Sciences, Tsinghua University where he completed an in-service graduate program in Marxist theory and ideological 
+and political education. He holds a Doctor of Law degree. Xi is currently General Secretary of the CPC Central Committee, 
+Chairman of the CPC Central Military Commission, President of the People's Republic of China (PRC), and Chairman of the PRC 
+Central Military Commission.
+
+Nltk、Spacy、Stanfordnlp都能够正确地识别出人名、地名、组织名等命名实体，并给它们分配合适的词性标签，如NNP（专有名词）、GPE（地理政治实体）等。
+Nltk和Spacy使用了不同的词性标注体系，而Stanfordnlp使用了通用依存关系语法的标注体系。因此，它们对一些词性的划分和命名有所差异，例如Nltk将动词分为VB（动词原形）、VBD（动词过去式）、VBG（动词现在分词）等，而Spacy将动词统一为VERB，并用细粒度的特征来区分时态和语态等。Stanfordnlp则使用了UD的标准动词类别，如AUX（助动词）、PART(助词)等
+Nltk和Spacy倾向于将标点符号标记为符号，而Stanfordnlp则根据标点符号的句法功能进行标记，如PUNCT(标点符号)或SCONJ(从属连词)。
+总的来说，这三个工具包在词性标记方面都有很高的准确性，但在某些情况下它们可能有不同的偏好或错误。
+
+
+Chinese
+Jieba在paddle模式下对专有名词进行了细分，比如出现 TIME , LOC , ORG , PER ，分别是时间，地点，机构名，人名，而不是将这些统称为专有名词。但词性标注功能较弱，对标点的标注比较混乱，有时候标注成名词，有时候标注成动词。有时分词不太准确，搞不清动词和动名词。
+
+Stanfordnlp对标点的词性划分比较正常。但对名次划分不够细致，很多词的词性都标注错误。
+
+SnowNLP总体完成了分词的任务，但是相较于其他方法没有明显的优点。对名词的区分比较乱。由于分词效果不好，因此影响了词性标注的效果，速度较慢，且需要额外安装依赖包。对一词多词性和未登录词处理不好
+
+THULAC在不考虑分词的情况下，词性标注效果不错，可以区分人名，机构名，量词等。总体效果十分不错。但分词效果太细致，导致词性标注太细致，容易将原本是一个词性的词分开标注。部分词性标注不准确，将 0 标注为 v 。容易分不清副词和形容词。
+
+NLPIR标注方式为正常的英文，而不是自定义的词性表，看起来非常易懂。但没有对名词进行区分，和其他方法相比，甚至没有将名词和专有名词区分开。对一词多词性和未登录词处理不好。
+
+
+THULAC是清华大学开发的一套高效的中文分词和词性标注工具包，利用了大规模的人工标注语料库进行训练，因此其准确率较高，它可以同时进行分词和词性标注，并且支持多种语言它支持多种编程语言，并提供了命令行和在线接口。
+NLPIR是中科院计算所开发的一套自然语言处理系统，包括分词、词性标注、命名实体识别等功能。它也支持多种编程语言，并提供了丰富的文档和示例代码。对一词多词性和未登录词处理不好。
+
+HanLP是哈尔滨工业大学开发的一套自然语言处理工具集，包括分词、词性标注、命名实体识别等功能。它采用了多种算法和模型进行优化，因此其速度和准确率都很高。缺点是需要下载模型文件。
+
+
+
+
+
+Jieba和SnowNLP的词性标注结果比较简单，只有名词、动词、形容词等基本类别，而THULAC、NLPIR、StandfordCoreNLP和HanLP的结果比较细致，包含了专有名词、量词、助词等更多类别。
+StandfordCoreNLP和HanLP的结果比较一致，而且在一些细节上比其他工具更准确。
+Jieba和SnowNLP在一些复合词或新词上的分割效果不太理想。SnowNLP在一些常用词上的标注错误率比较高。THULAC、NLPIR、StandfordCoreNLP和HanLP则相对更稳定。
+总结来说，StandfordCoreNLP和HanLP是两个比较先进和准确的中文分词和词性标注工具，它们利用了神经网络技术来提高效果。Jieba和SnowNLP是两个比较简单和快速的工具，它们适合于一些不需要太精细的场景。THULAC和NLPIR是两个比较全面和平衡的工具，它们结合了规则和统计方法来提供多样化的功能。
+
+
+Jieba和SnowNLP在社交媒体帖子或在线评论等非正式文本上表现良好，它们可以捕捉口语表达和表情符号。然而，他们在阅读新闻文章或学术论文等正式文本时可能会有困难，因为他们可能会错误地分类专有名词或专业术语。
+THULAC在包含大量数字或度量单位的文本上表现良好，它可以区分分类器和度量词。但是，它可能在处理包含大量命名实体或缩写的文本时遇到困难，它可能无法识别它们或为它们分配不正确的标记。
+NLPIR在包含大量命名实体或位置的文本上表现良好，它可以识别它们并为它们分配特定的标记。然而，对于包含大量习语或俚语的文本，它可能会有困难，因为它可能会错误地分割它们或为它们分配通用标签。
+StandfordCoreNLP在遵循标准语法规则和标点符号惯例的文本上表现良好，它可以分析句子的语法结构和依赖关系。但是，对于偏离标准规范或包含错误或拼写错误的文本，它可能会产生不准确或不完整的结果。
+HanLP在需要联合分割和命名实体识别的文本上表现良好，可以利用其多任务学习模型实现较高的准确性和效率。但是，它在处理需要细粒度词性标记的文本时可能会遇到困难，因为它可能不支持某些特定的标记或类别。
+
+
+
+

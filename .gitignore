@@ -1,0 +1,9 @@
+*.zip
+*.rar
+*.7z
+submit.url
+*.docx
+*.pdf
+venv/
+nlp/*
+!nlp/README.md
