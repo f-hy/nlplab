@@ -5,5 +5,3 @@ submit.url
 *.docx
 *.pdf
 venv/
-nlp/*
-!nlp/README.md
