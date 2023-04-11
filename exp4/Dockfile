@@ -1,0 +1,13 @@
+# docker pull mindspore/mindspore-gpu:0.5.0-beta
+FROM  mindspore/mindspore-gpu:0.5.0-beta
+# as ms050bg
+MAINTAINER f-hy<friendy2021@outlook.com>
+ENV wd /root/f/4/
+RUN mkdir -p ${wd}
+WORKDIR ${wd}
+COPY bert_ner_notebook ${wd}
+COPY Chinese.txt ${wd}
+COPY English.txt ${wd}
+COPY 常用的标注指代.txt ${wd}
+
+CMD ["/bin/bash"]

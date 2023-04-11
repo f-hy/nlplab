@@ -3,4 +3,7 @@
 *.7z
 submit.url
 202000130046_数据_付洪友_实验*
+~$*
 venv/
+*.downloading
+*.bz2
