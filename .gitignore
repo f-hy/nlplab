@@ -6,4 +6,10 @@ submit.url
 ~$*
 venv/
 *.downloading
+
+# ML
+*.npy
+*.model
+*.wordvectors
+*.txt
 *.bz2
